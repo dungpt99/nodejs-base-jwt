@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "caerux",
+    "password": ".caerux",
+    "database": "node_base",
+    "host": "mariadb_node_base",
+    "dialect": "mariadb"
+  },
+  "test": {
+    "username": "caerux",
+    "password": ".caerux",
+    "database": "node_base",
+    "host": "mariadb_node_base",
+    "dialect": "mariadb"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
