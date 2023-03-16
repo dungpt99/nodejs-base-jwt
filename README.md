@@ -13,11 +13,15 @@ docker-compose up -d --build
 
 #### Run Nodejs
 ```
+npm i
+
+npm run build
+
 docker exec -it node_base /bin/sh
 
 cp .env.example .env
 
-cd databases
+cd dist/database
 
 sequelize db:migrate
 

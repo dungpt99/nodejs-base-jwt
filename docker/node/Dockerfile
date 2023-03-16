@@ -101,6 +101,6 @@ RUN npm install -g sequelize-cli
 
 RUN npm install -g nodemon
 
-RUN npm install
+# RUN npm install
 
 CMD [ "node" ]
