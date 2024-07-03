@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import {Sequelize,QueryInterface, DataTypes} from "sequelize";
+import { Sequelize, QueryInterface, DataTypes } from "sequelize";
 
 module.exports = {
   up: async (queryInterface: QueryInterface, Sequelize: Sequelize) => {
@@ -46,6 +46,6 @@ module.exports = {
   },
 
   down: async (queryInterface: QueryInterface, Sequelize: Sequelize) => {
-    await queryInterface.dropTable('users');
-  }
+    await queryInterface.dropTable("users");
+  },
 };

@@ -12,6 +12,13 @@ const badRequest: res = {
   data: {},
 };
 
+const serverError: res = {
+  error: true,
+  status: 500,
+  message: "Internal Server Error",
+  data: {},
+};
+
 const unauthorized: res = {
   error: true,
   status: 401,
@@ -25,11 +32,4 @@ const success: res = {
   message: "Successful",
 };
 
-export { badRequest, unauthorized, success };
-
-
-
-
-
-
-
+export { badRequest, unauthorized, success, serverError };

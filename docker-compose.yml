@@ -1,37 +1,34 @@
-version: '3'
+version: "3"
 
 networks:
   my_network:
 
 services:
-    node:
-        build: 
-            context: ./
-            dockerfile: ./docker/node/Dockerfile
-        container_name: node_base
-        ports: 
-            - 8000:8000
-        volumes: 
-            - ./:/var/www/html
-        networks: 
-            - my_network
-        tty: true
-    mariadb:
-        build:
-            context: ./
-            dockerfile: ./docker/mariadb/Dockerfile
-        container_name: mariadb_node_base
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "33060:3306"
-        volumes:
-            - ./docker/mariadb/my.cnf:/etc/mysql/my.cnf
-        environment:
-            MYSQL_DATABASE: node_base
-            MYSQL_USER: caerux
-            MYSQL_PASSWORD: .caerux
-            MYSQL_ROOT_PASSWORD: .caerux
-            SERVICE_NAME: mysql
-        networks:
-            - my_network
+  app:
+    image: node:18-alpine
+    command: sh -c "npm install && npm run build && npm run dev"
+    ports:
+      - 8000:8000
+    working_dir: /app
+    networks:
+      - my_network
+    volumes:
+      - ./:/app
+    environment:
+      DB_HOST: localhost
+      DB_USERNAME: root
+      DB_PASSWORD: .caerux
+      DB_DATABASE: node_base
+      DB_PORT: 3306
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_DATABASE: node_base
+      MARIADB_USER: caerux
+      MARIADB_PASSWORD: .caerux
+      MARIADB_ROOT_PASSWORD: .caerux
+      SERVICE_NAME: mariadb
+    networks:
+      - my_network

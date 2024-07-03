@@ -1,6 +1,6 @@
 "use strict";
 
-import {Request} from "express";
+import { Request } from "express";
 import bcrypt from "bcryptjs";
 
 import UserRepository from "@components/repositories/UserRepository";

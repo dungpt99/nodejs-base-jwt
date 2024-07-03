@@ -1,43 +1,37 @@
 import { Model } from "sequelize";
 
-export interface UserAttributes {
+export interface TaskAttributes {
   id: number;
   name: string;
-  email: string;
-  password: string;
+  done: boolean;
   created_at: Date;
   updated_at?: Date;
 }
 
-export interface ResponseUser {
+export interface ResponseTask {
   id: number;
   name: string;
-  email: string;
+  done: boolean;
   created_at: Date;
   updated_at?: Date;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class User extends Model<UserAttributes> implements UserAttributes {
-    email: string;
-    password: string;
+  class Task extends Model<TaskAttributes> implements TaskAttributes {
     id!: number;
     name!: string;
+    done!: boolean;
     created_at!: Date;
     updated_at?: Date | undefined;
 
     static associate(models: any) {
-      User.belongsToMany(models.Role, {
-        as: "roles",
-        through: "role_user",
+      Task.belongsTo(models.User, {
+        as: "users",
         foreignKey: "user_id",
-        otherKey: "role_id",
-        timestamps: false,
       });
     }
   }
-
-  User.init(
+  Task.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -48,21 +42,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      done: {
+        type: DataTypes.BOOLEAN,
+        primaryKey: true,
       },
       created_at: "TIMESTAMP",
       updated_at: "TIMESTAMP",
     },
     {
       sequelize,
-      tableName: "users",
+      tableName: "tasks",
     }
   );
-  return User;
+  return Task;
 };

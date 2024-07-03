@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 import db from "@database/index";
-const {User, Role} = db;
+const { User, Role } = db;
 
 const UserRepository = {
   getUserByEmail: async (email: string) => {
@@ -18,7 +18,7 @@ const UserRepository = {
     });
 
     return user;
-  }
+  },
 };
 
 export default UserRepository;

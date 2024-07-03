@@ -39,11 +39,11 @@ interface DatabaseValue {
 }
 
 let database: DatabaseValue = {
-  username: "caerux",
-  password: ".caerux",
-  database: "node_base",
-  host: "mariadb_node_base",
-  port: 3306,
+  username: process.env.DB_USERNAME || "caerux",
+  password: process.env.DB_PASSWORD || ".caerux",
+  database: process.env.DB_DATABASE || "node_base",
+  host: process.env.DB_HOST || "mariadb_node_base",
+  port: Number(process.env.DB_PORT) || 3306,
   dialect: "mariadb",
   dialectOptions: {
     dateStrings: true,
